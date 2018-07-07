@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@drawable/bground"
+    android:minHeight="250dp">
 
     <TextView
         android:id="@+id/text"
@@ -11,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="正在检查更新。。。"
         android:textSize="16sp"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="136dp"
-        tools:layout_editor_absoluteY="244dp"
-        tools:ignore="MissingConstraints" />
-</android.support.constraint.ConstraintLayout>
+        tools:layout_editor_absoluteY="244dp" />
+</LinearLayout>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
@@ -18,8 +19,6 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         textView = (TextView) findViewById(R.id.text);
-        PermissionUtils.requestPermission(this,PermissionUtils.CODE_WRITE_EXTERNAL_STORAGE,permissionGrant);
-
     }
     private PermissionUtils.PermissionGrant permissionGrant = new PermissionUtils.PermissionGrant() {
         @Override
@@ -33,6 +32,11 @@ public class SplashActivity extends AppCompatActivity {
             }
         }
     };
+    @Override
+    public void onResume(){
+        super.onResume();
+        PermissionUtils.requestPermission(this,PermissionUtils.CODE_WRITE_EXTERNAL_STORAGE,permissionGrant);
+    }
     private void init() {
         File externalStorageDirectory = Environment.getExternalStorageDirectory();
 
@@ -44,16 +48,19 @@ public class SplashActivity extends AppCompatActivity {
             fileDir.mkdirs();
         }
         if (FixDexUtil.isGoingToFix(this)) {
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+
             FixDexUtil.loadFixedDex(this, Environment.getExternalStorageDirectory());
             textView.setText("正在修复。。。。");
 
         }
-        startActivity(new Intent(SplashActivity.this,MainActivity.class));
+     new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                finish();
+            }
+        },3000);
+
     }
     /**
      * 请求权限回调方法
