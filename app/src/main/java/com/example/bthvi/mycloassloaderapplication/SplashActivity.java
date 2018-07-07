@@ -40,28 +40,28 @@ public class SplashActivity extends AppCompatActivity {
     private void init() {
         File externalStorageDirectory = Environment.getExternalStorageDirectory();
 
-        // 遍历所有的修复dex , 因为可能是多个dex修复包
-        File fileDir = externalStorageDirectory != null ?
-                new File(externalStorageDirectory,"007"):
-                new File(getFilesDir(), FixDexUtil.DEX_DIR);// data/user/0/包名/files/odex（这个可以任意位置）
+    // 遍历所有的修复dex , 因为可能是多个dex修复包
+    File fileDir = externalStorageDirectory != null ?
+            new File(externalStorageDirectory,"007"):
+            new File(getFilesDir(), FixDexUtil.DEX_DIR);// data/user/0/包名/files/odex（这个可以任意位置）
         if (!fileDir.exists()){
-            fileDir.mkdirs();
-        }
+        fileDir.mkdirs();
+    }
         if (FixDexUtil.isGoingToFix(this)) {
 
-            FixDexUtil.loadFixedDex(this, Environment.getExternalStorageDirectory());
-            textView.setText("正在修复。。。。");
-
-        }
-     new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashActivity.this,MainActivity.class));
-                finish();
-            }
-        },3000);
+        FixDexUtil.loadFixedDex(this, Environment.getExternalStorageDirectory());
+        textView.setText("正在修复。。。。");
 
     }
+     new Handler().postDelayed(new Runnable() {
+        @Override
+        public void run() {
+            startActivity(new Intent(SplashActivity.this,MainActivity.class));
+            finish();
+        }
+    },3000);
+
+}
     /**
      * 请求权限回调方法
      * Callback received when a permissions request has been completed.
