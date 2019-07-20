@@ -63,7 +63,9 @@ public class FixDexUtil {
 
         File[] listFiles = fileDir.listFiles();
         if (listFiles != null){
+            System.out.println("TAG==目录下文件数量="+listFiles.length);
             for (File file : listFiles) {
+                System.out.println("TAG==文件名称="+file.getName());
                 if (file.getName().startsWith("classes") &&
                         (file.getName().endsWith(DEX_SUFFIX)
                                 || file.getName().endsWith(APK_SUFFIX)
